@@ -46,7 +46,7 @@ class solve_elas2D(object):
         else:
             nelastic = 4
 
-        strain_matrix_str = strain_matrix_string.Elastics_3D(nelastic=nelastic)
+        strain_matrix_str = strain_matrix_string.Elastics_2D(nelastic=nelastic)
 
         starin_step = 2.0 * strain_max / (strain_num - 1)
         strain_param = np.arange(-strain_max, strain_max + 0.0001, starin_step)
