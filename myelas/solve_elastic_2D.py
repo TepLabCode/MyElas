@@ -137,11 +137,13 @@ class solve_elas2D(object):
 
         elas[0, 1] = c_coeffs[3] - c_coeffs[0] - c_coeffs[1]
         elas[1, 0] = elas[0, 1]
-        if self.spg_num >= 3 and self.spg_num <= 15:
-            elas[0, 2] = c_coeffs[4] - c_coeffs[0] - c_coeffs[4]
+
+        # Oblique
+        if 3 <= self.spg_num <= 15:
+            elas[0, 2] = c_coeffs[4] - c_coeffs[0] - c_coeffs[2]
             elas[2, 0] = elas[0, 2]
 
-            elas[1, 2] = c_coeffs[5] - c_coeffs[1] - c_coeffs[4]
+            elas[1, 2] = c_coeffs[5] - c_coeffs[1] - c_coeffs[2]
             elas[2, 1] = elas[1, 2]
 
         Title = "The 2D mechanical properties"
