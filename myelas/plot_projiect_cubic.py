@@ -6,7 +6,7 @@ from matplotlib.patches import FancyArrowPatch
 from mpl_toolkits.mplot3d import proj3d
 import matplotlib.gridspec as gridspec
 
-plt.rcParams["font.sans-serif"] = ["Times New Roman"]
+plt.rcParams["font.sans-serif"] = ["Times New Roman", "FreeSerif", "DejaVu Serif"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
