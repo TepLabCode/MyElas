@@ -41,7 +41,7 @@ class solve_elas2D(object):
         strain_num : must be equal to the number of strain poscar in one elastic independent.
         """
 
-        if self.spg_num >= 3 and self.spg_num <= 15:
+        if 1 <= self.spg_num <= 15:
             nelastic = 6
         else:
             nelastic = 4
@@ -139,7 +139,7 @@ class solve_elas2D(object):
         elas[1, 0] = elas[0, 1]
 
         # Oblique
-        if 3 <= self.spg_num <= 15:
+        if 1 <= self.spg_num <= 15:
             elas[0, 2] = c_coeffs[4] - c_coeffs[0] - c_coeffs[2]
             elas[2, 0] = elas[0, 2]
 

@@ -28,7 +28,7 @@ class strain_poscar_2d(object):
         nelastic: Independent elastic component
 
         """
-        if self.spg_num <= 15:
+        if 1 <= self.spg_num <= 15:
             nelastic = 6
         else:
             nelastic = 4
@@ -36,7 +36,7 @@ class strain_poscar_2d(object):
         starin_step = 2 * strain_max / (strain_num - 1)
         strain_param = np.arange(-strain_max, strain_max + 0.0001, starin_step)
         for i in np.arange(0, strain_num, 1):
-            if self.spg_num <= 15:
+            if 1 <= self.spg_num <= 15:
                 defmat = np.array(
                     [
                         [strain_param[i], 0.0, 0.0, 0.0, 0.0, 0.0],
