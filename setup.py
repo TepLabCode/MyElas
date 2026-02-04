@@ -9,7 +9,7 @@ except ImportError:
 
 setup(
     name='Myelas',
-    version='1.0.1',
+    version='2.0.2',
     packages=["myelas"],
     install_requires=['numpy', 'spglib', 'matplotlib'],
     author="Hao Wang",
