@@ -26,12 +26,14 @@ class solve_elas2D(object):
             self.latt[0, 0] * self.latt[1, 1] - self.latt[1, 0] * self.latt[0, 1]
         )
 
-        self.area = (self.lattindex ** 2.0) * np.sqrt(
+        self.area = (self.lattindex**2.0) * np.sqrt(
             recipvect[0, 0] ** 2 + recipvect[0, 1] ** 2 + recipvect[0, 2] ** 2
         )
 
     def solve(
-        self, strain_max=None, strain_num=None,
+        self,
+        strain_max=None,
+        strain_num=None,
     ):
         """
         To solve the second elastics
@@ -43,8 +45,8 @@ class solve_elas2D(object):
             nelastic = 6
         else:
             nelastic = 4
-        
-        strain_matrix_str=strain_matrix_string.Elastics_3D(nelastic=nelastic)
+
+        strain_matrix_str = strain_matrix_string.Elastics_3D(nelastic=nelastic)
 
         starin_step = 2.0 * strain_max / (strain_num - 1)
         strain_param = np.arange(-strain_max, strain_max + 0.0001, starin_step)
@@ -92,7 +94,6 @@ class solve_elas2D(object):
             strain_energy[nelas] = np.array(energy)
 
             for j in np.arange(0, strain_num, 1):
-
                 fit_param = (np.array(energy)[j] - np.array(energy).min()) / (self.area)
                 fit_energy.append(fit_param)
 
@@ -113,8 +114,8 @@ class solve_elas2D(object):
                 x=strain_param,
                 y=fit_energy,
                 fit_func=fit_func,
-                figname="Nelastic {:0>1d}".format(nelas+1),
-                strain_str = strain_matrix_str[nelas]
+                figname="Nelastic {:0>1d}".format(nelas + 1),
+                strain_str=strain_matrix_str[nelas],
             )
 
         self.__rect2d_solve(c_coeffs=fit_coeffs)
@@ -148,7 +149,6 @@ class solve_elas2D(object):
         self.elasproperties(Celas=elas, title=Title)
 
     def elasproperties(self, Celas=None, title=None):
-
         Selas = np.linalg.inv(Celas)
 
         B_v = (Celas[0, 0] + Celas[1, 1] + 2 * Celas[0, 1]) / 4.0
@@ -184,7 +184,8 @@ class solve_elas2D(object):
         elasfile = open("second_elastic.out", mode="w")
 
         print(
-            "2D elastic constants", file=elasfile,
+            "2D elastic constants",
+            file=elasfile,
         )
         print("Space group: ", format(self.spg_num), file=elasfile)
 
@@ -221,7 +222,8 @@ class solve_elas2D(object):
         print("\n", end="", file=elasfile)
 
         print(
-            "Young(Ex and Ey) and shear(Gxy) moduli", file=elasfile,
+            "Young(Ex and Ey) and shear(Gxy) moduli",
+            file=elasfile,
         )
         print("Ex : {:.4f}".format(Ex), file=elasfile)
         print("Ey : {:.4f}".format(Ey), file=elasfile)
@@ -229,7 +231,8 @@ class solve_elas2D(object):
 
         print("\n", end="", file=elasfile)
         print(
-            "Poisson ratios(Muxy and Muyx)", file=elasfile,
+            "Poisson ratios(Muxy and Muyx)",
+            file=elasfile,
         )
         print("Muxy : {:.4f}".format(Muxy), file=elasfile)
         print("Muyx : {:.4f}".format(Muyx), file=elasfile)
@@ -243,6 +246,6 @@ class solve_elas2D(object):
         print("  Elastic anisotropy index      : ", format(A_SU, ".2f"), file=elasfile)
         print("  Ranganathan anisotropy index  : ", format(A_R, ".2f"), file=elasfile)
         print("  Kube anisotropy index         : ", format(A_K, ".2f"), file=elasfile)
-        
+
         print("\n", end="", file=elasfile)
         print("Please cite: Comput. Phys. Commun., 281 (2022), 108495", file=elasfile)
