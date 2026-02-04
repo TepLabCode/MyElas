@@ -1,8 +1,6 @@
 import numpy as np
 import os
 from . import read_poscar as readpos
-#from shutil import copy
-from . import standard_cell
 
 
 class strain_poscar_2d(object):
@@ -58,7 +56,7 @@ class strain_poscar_2d(object):
                         [strain_param[i], strain_param[i], 0.0, 0.0, 0.0, 0.0],
                     ]
                 )
-            
+
             strten = np.zeros((3, 3))
             for j in np.arange(0, nelastic, 1):
                 strten[0, 0] = defmat[j, 0] + 1.0
@@ -94,7 +92,7 @@ class strain_poscar_2d(object):
 
         # writepos = open("POSCAR_"+str(format(nelas + 1, "02d")) +
         #                "_"+str(format(ndef + 1, "03d")), mode="w",)
-        writepos = open(full_path + "/POSCAR", mode="w",)
+        writepos = open(full_path + "/POSCAR", mode="w")
         print("strain_poscar", file=writepos)
         print("1.0", file=writepos)
         for m in np.arange(0, 3, 1):
